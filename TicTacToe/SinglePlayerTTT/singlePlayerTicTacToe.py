@@ -8,19 +8,21 @@ def printBoard():
     for col in row:
       formattedRow +=(col + "|")
     print(formattedRow[:-1])
+  print()
 
 def getUserInput():
   isPossible = False
   while not isPossible:
     try:
-      user_position = int(input("where do you want to put the X (0 to 8): "))
+      user_position = int(input("Where do you want to put the X (0 to 8): "))
       if board[user_position//3][user_position%3] == "-":
         board[user_position//3][user_position%3] = "X"
         isPossible = True
       else:
         raise Exception("invalid input")
     except:
-      print("please put a valid input")
+      print()
+      print("Please put a valid input")
       continue
 
 def computerPosition():
@@ -180,11 +182,15 @@ def checkWin(playerSymbol):
     return False
 
 while any("-" in row for row in board):
+  print("Your Turn")
   getUserInput()
   if checkWin("X"):
     print("You Win!")
     isTie = False
     break
+  if not any("-" in row for row in board):
+    break5
+  print("\nComputer's Turn")
   computerPosition()
   if checkWin("O"):
     print("You Lose :(")
